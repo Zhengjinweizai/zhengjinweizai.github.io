@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { AUTHOR, GITHUB, EMAIL } from '../config';
+---
+
+<Base title="关于" description={`关于 ${AUTHOR}`}>
+  <div class="prose">
+    <h1 class="page-title">关于我</h1>
+
+    <p>你好,我是 {AUTHOR}。(这里写一段自我介绍:你是谁、在做什么、对这个站的期待。)</p>
+
+    <h2>正在做的事</h2>
+    <ul>
+      <li><strong>Agent 档案馆</strong>——把与 AI Agent 的对话存档、检索、回看的本地工具</li>
+      <li><strong>AI 短剧创作流水线</strong>——从小说到大纲、剧本、分镜与美术设定的完整工作流</li>
+      <li><strong>这个网站</strong>——写作与作品的自留地</li>
+    </ul>
+
+    <h2>找到我</h2>
+    <ul>
+      <li>GitHub:<a href={GITHUB}>{GITHUB.replace('https://', '')}</a></li>
+      <li>邮箱:<a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+    </ul>
+  </div>
+</Base>

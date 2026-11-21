@@ -1,0 +1,149 @@
+/* =============================================================
+   编辑风 · 简约留白
+   暖纸白底 + 近黑正文 + 赭红点缀;标题衬线,正文黑体
+   ============================================================= */
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --ink: #24221e;
+  --ink-2: #6f6a61;
+  --ink-3: #a9a297;
+  --accent: #a4442c;
+  --hairline: #e7e3da;
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- 页头 ---------- */
+.site-header { border-bottom: 1px solid var(--hairline); }
+.header-inner {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 28px 0 22px; gap: 16px; flex-wrap: wrap;
+}
+.site-name {
+  font-family: var(--serif); font-weight: 700; font-size: 20px; letter-spacing: 0.02em;
+}
+.site-name:hover { color: var(--accent); }
+.site-header nav { display: flex; gap: 22px; font-size: 14.5px; color: var(--ink-2); }
+.site-header nav a { padding-bottom: 2px; border-bottom: 2px solid transparent; transition: color .15s; }
+.site-header nav a:hover { color: var(--ink); }
+.site-header nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+main { flex: 1; padding: 48px 0 72px; }
+
+/* ---------- 首页 ---------- */
+.hero { padding: 24px 0 8px; }
+.hero h1 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(30px, 5vw, 42px); line-height: 1.35; margin: 0 0 14px;
+}
+.hero .bio { color: var(--ink-2); font-size: 17px; max-width: 34em; margin: 0 0 10px; }
+.hero-links { margin: 0; }
+.hero-links a { color: var(--accent); }
+.hero-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.section { margin-top: 56px; }
+.section-title {
+  font-family: var(--serif); font-size: 21px; font-weight: 700;
+  margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--hairline);
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.section-title .more { font-family: var(--sans); font-size: 13.5px; font-weight: 400; color: var(--ink-3); }
+.section-title .more:hover { color: var(--accent); }
+
+/* 文章行 */
+.post-list { list-style: none; margin: 0; padding: 0; }
+.post-row {
+  display: flex; gap: 18px; align-items: baseline;
+  padding: 13px 0; border-bottom: 1px solid var(--hairline);
+}
+.post-list li:last-child .post-row { border-bottom: none; }
+.post-row time { font-family: var(--mono); font-size: 13px; color: var(--ink-3); white-space: nowrap; }
+.post-row .t { font-size: 16.5px; }
+.post-row:hover .t { color: var(--accent); }
+
+/* 卡片 */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.card {
+  display: block; background: var(--surface);
+  border: 1px solid var(--hairline); border-radius: 6px;
+  padding: 18px 20px; transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card .cat { font-size: 12px; color: var(--accent); letter-spacing: 0.08em; }
+.card h3 { font-family: var(--serif); font-size: 17.5px; margin: 6px 0 8px; }
+.card p { margin: 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.7; }
+
+/* ---------- 列表页 ---------- */
+.page-title { font-family: var(--serif); font-size: 30px; margin: 8px 0 6px; }
+.page-sub { color: var(--ink-2); margin: 0 0 36px; }
+.rss-link { color: var(--accent); }
+.year-group { margin-top: 34px; }
+.year {
+  font-family: var(--serif); font-size: 15px; color: var(--ink-3);
+  letter-spacing: 0.1em; margin: 0 0 6px;
+}
+.blog-desc { color: var(--ink-2); font-size: 13.5px; margin: 2px 0 14px; }
+
+/* ---------- 文章正文 ---------- */
+.prose { max-width: 700px; }
+.post-header { margin-bottom: 34px; }
+.post-header h1 { font-family: var(--serif); font-size: clamp(26px, 4.5vw, 34px); line-height: 1.4; margin: 0 0 12px; }
+.post-meta { display: flex; gap: 14px; color: var(--ink-3); font-size: 13.5px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+.post-meta time { font-family: var(--mono); }
+.tag { border: 1px solid var(--hairline); border-radius: 999px; padding: 1px 10px; font-size: 12px; color: var(--ink-2); }
+
+.prose h2 { font-family: var(--serif); font-size: 22px; margin: 40px 0 14px; }
+.prose h3 { font-family: var(--serif); font-size: 18px; margin: 30px 0 12px; }
+.prose p { margin: 0 0 18px; }
+.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.prose ul, .prose ol { padding-left: 1.6em; margin: 0 0 18px; }
+.prose li { margin-bottom: 6px; }
+.prose blockquote {
+  margin: 22px 0; padding: 2px 0 2px 18px;
+  border-left: 2px solid var(--accent); color: var(--ink-2);
+}
+.prose code { font-family: var(--mono); font-size: 0.88em; background: #f0ede6; border-radius: 3px; padding: 2px 5px; }
+.prose pre { background: #f4f1ea; border: 1px solid var(--hairline); border-radius: 6px; padding: 16px 18px; overflow-x: auto; }
+.prose pre code { background: none; padding: 0; font-size: 13.5px; line-height: 1.7; }
+.prose img { max-width: 100%; border-radius: 6px; }
+.prose hr { border: none; border-top: 1px solid var(--hairline); margin: 36px 0; }
+
+.post-footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--hairline); font-size: 14px; }
+.post-footer a { color: var(--accent); }
+.post-footer a:hover { text-decoration: underline; }
+
+/* ---------- 页脚 ---------- */
+.site-footer { border-top: 1px solid var(--hairline); padding: 20px 0 28px; color: var(--ink-3); font-size: 13px; }
+.site-footer .container { display: flex; gap: 10px; flex-wrap: wrap; }
+.site-footer a:hover { color: var(--accent); }
+.site-footer .dot { color: var(--hairline); }
+
+/* ---------- 404 ---------- */
+.nota { text-align: center; padding: 72px 0; }
+
+@media (max-width: 560px) {
+  .header-inner { padding: 20px 0 14px; }
+  main { padding-top: 32px; }
+  .post-row { flex-direction: column; gap: 2px; }
+}

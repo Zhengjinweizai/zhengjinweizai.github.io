@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const works = (await getCollection('works'))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="作品" description="项目与创作作品集">
+  <h1 class="page-title">作品与项目</h1>
+  <p class="page-sub">正在做和做完的东西</p>
+
+  <div class="card-grid">
+    {works.map((w) => (
+      <a class="card" href={w.data.link ?? `/works/${w.id}/`}>
+        <span class="cat">{w.data.category}</span>
+        <h3>{w.data.title}</h3>
+        <p>{w.data.summary}</p>
+      </a>
+    ))}
+  </div>
+</Base>

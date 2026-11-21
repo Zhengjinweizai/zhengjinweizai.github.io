@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((work) => ({ params: { id: work.id }, props: { work } }));
+}
+
+const { work } = Astro.props;
+const { Content } = await render(work);
+---
+
+<Base title={work.data.title} description={work.data.summary}>
+  <article class="prose">
+    <header class="post-header">
+      <div class="post-meta"><span class="tag">{work.data.category}</span></div>
+      <h1>{work.data.title}</h1>
+      <p class="page-sub">{work.data.summary}</p>
+    </header>
+    <Content />
+    <div class="post-footer">
+      <a href="/works/">← 返回作品列表</a>
+      {work.data.link && <span> · <a href={work.data.link}>访问项目 →</a></span>}
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { fmtDate } from '../../utils';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const groups: { year: number; posts: typeof posts }[] = [];
+for (const p of posts) {
+  const y = p.data.date.getFullYear();
+  const g = groups.find((x) => x.year === y);
+  if (g) g.posts.push(p);
+  else groups.push({ year: y, posts: [p] });
+}
+---
+
+<Base title="文章" description="全部文章与随笔">
+  <h1 class="page-title">文章</h1>
+  <p class="page-sub">共 {posts.length} 篇 · <a class="rss-link" href="/rss.xml">RSS 订阅</a></p>
+
+  {groups.map((g) => (
+    <section class="year-group">
+      <h2 class="year">{g.year}</h2>
+      <ul class="post-list">
+        {g.posts.map((p) => (
+          <li>
+            <a class="post-row" href={`/blog/${p.id}/`}>
+              <time datetime={p.data.date.toISOString().slice(0, 10)}>{fmtDate(p.data.date)}</time>
+              <span class="t">{p.data.title}</span>
+            </a>
+            {p.data.description && <p class="blog-desc">{p.data.description}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>
